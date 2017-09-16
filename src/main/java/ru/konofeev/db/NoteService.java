@@ -20,6 +20,8 @@ public class NoteService extends DataBaseService
 
     private final static String SELECT = "select identifier, note from note";
 
+    private final static String DELETE = "delete from note";
+
     private final static String SELECT_BY_IDENTIFIER = "select identifier, note from note where identifier = {0}";
 
     private final static String SELECT_BY_NOTE = "select identifier, note from note where note_upper like ''%{0}%''";
@@ -161,5 +163,13 @@ public class NoteService extends DataBaseService
     public void delete(String substringForDelete) throws Exception 
     {
         getStatement().executeUpdate(MessageFormat.format(DELETE_BY_FIND_TEXT, substringForDelete.toUpperCase()));
+    }
+
+    /**
+     * Удалить заметки
+     */
+    public void delete() throws Exception
+    {
+        getStatement().executeUpdate(DELETE);
     }
 }

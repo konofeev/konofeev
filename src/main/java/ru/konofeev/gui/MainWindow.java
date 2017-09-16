@@ -113,6 +113,17 @@ public class MainWindow
                             System.out.println(exception.getMessage());
                         }
                     }
+                    if (commandLine.getText().toUpperCase().startsWith(Command.DELETE.name().toUpperCase()))
+                    {
+                        try
+                        {
+                            deleteNotes();
+                        }
+                        catch (Exception exception)
+                        {
+                            System.out.println(exception.getMessage());
+                        }
+                    }
                 }
             }
         );
@@ -182,5 +193,11 @@ public class MainWindow
             mainArea.append(note.getNote());
             mainArea.append(System.lineSeparator());
         }
+    }
+
+    private void deleteNotes() throws Exception
+    {
+        noteService.delete();
+        mainArea.setText("");
     }
 }
