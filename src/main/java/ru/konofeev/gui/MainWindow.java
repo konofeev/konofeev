@@ -9,12 +9,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.text.DefaultStyledDocument;
-import javax.swing.text.StringContent;
+import javax.swing.text.StringContent;                                        
 import javax.swing.text.StyleContext;
 import ru.konofeev.db.NoteService; import ru.konofeev.entity.Note;
 
 /**
- * Основное окно
+ * Главное окно приложения
  */
 public class MainWindow
 {
@@ -22,6 +22,9 @@ public class MainWindow
     private JTextArea mainArea = null;
     private JTextField commandLine = null;
 
+    /**
+     * Конструктор
+     */
     public MainWindow() throws Exception
     {
         noteService = new NoteService();
@@ -29,6 +32,9 @@ public class MainWindow
         createMainWindow();
     }
 
+    /**
+     * Создать главное окно
+     */
     private void createMainWindow() throws Exception
     {
 		JFrame frame = new JFrame();
@@ -43,13 +49,20 @@ public class MainWindow
 		frame.setVisible(true);
     }
 
+    /**
+     * Инициализация временных заметок
+     * Метод временный
+     */
     private void initializeTempNotes() throws Exception
     {
-        noteService.createNote("Одна из тестовых заметок");
-        noteService.createNote("Ещё одна из тестовых заметок");
-        noteService.createNote("Совсем другая заметка");
+        //noteService.createNote("Одна из тестовых заметок");
+        //noteService.createNote("Ещё одна из тестовых заметок");
+        //noteService.createNote("Совсем другая заметка");
     }
 
+    /**
+     * Получить командную строку
+     */
     private JTextField getCommandLine() throws Exception
     {
         JTextField commandLine = new JTextField("Command line");
@@ -106,6 +119,9 @@ public class MainWindow
         return commandLine;
     }
 
+    /**
+     * Получить основную тектовую область
+     */
     private JTextArea getMainArea() throws Exception
     {
         JTextArea textArea = new JTextArea(5, 20);
@@ -115,6 +131,9 @@ public class MainWindow
         return textArea;
     }
 
+    /**
+     * Напечатать заметки
+     */
     private void printNotes(JTextArea mainArea) throws Exception
     {
         mainArea.append("Заметки");
@@ -131,6 +150,11 @@ public class MainWindow
         }
     }
 
+    /**
+     * Создать заметку
+     *
+     * @param commandText Текст командной строки
+     */
     private void createNote(String commandText) throws Exception
     {
         String note = commandText.substring(Command.CREATE.name().length() + 1);
@@ -138,6 +162,11 @@ public class MainWindow
         mainArea.append(note);
     }
 
+    /**
+     * Найти заметку
+     *
+     * @param commandText Текст командной строки
+     */
     private void findNote(String commandText) throws Exception
     {
         String findText = commandText.substring(Command.FIND.name().length() + 1);

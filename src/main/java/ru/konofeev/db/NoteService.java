@@ -5,12 +5,32 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.ArrayList;
 import ru.konofeev.entity.Note;
+import java.text.MessageFormat;
 
 /**
- * Сущность заметок
+ * Сервис заметок
  */
 public class NoteService extends DataBaseService
 {
+    private final static String CREATE_TABLE = "create table if not exists `note` ( `identifier` integer primary key autoincrement not null , `note` varchar(4096) not null, `note_upper` varchar(4096) not null);";
+
+    private final static String CREATE_INDEX = "create index if not exists NoteTextValue on `Note`(`note_upper`)";
+
+    private final static String INSERT = "insert into note (note, note_upper) values (''{0}'', ''{1}'')";
+
+    private final static String SELECT = "select identifier, note from note";
+
+    private final static String SELECT_BY_IDENTIFIER = "select identifier, note from note where identifier = {0}";
+
+    private final static String SELECT_BY_NOTE = "select identifier, note from note where note_upper like ''%{0}%''";
+
+    private final static String DELETE_BY_IDENTIFIER = "delete from note where identifier = {0}";
+
+    private final static String DELETE_BY_FIND_TEXT = "delete from note where note_upper like ''%{0}%''";
+
+    /**
+     * Конструктор
+     */
     public NoteService() throws Exception
     {
         initialize();
@@ -18,12 +38,12 @@ public class NoteService extends DataBaseService
 
     /**
      * Инициализация
-     * Создаётся таблица, если её не было
+     * Создаётся таблица и индекс, если их не было
      */
     public void initialize() throws Exception
     {
-        getStatement().executeUpdate("create table if not exists `note` ( `identifier` integer primary key autoincrement not null , `note` varchar(4096) not null, `note_upper` varchar(4096) not null);");
-        getStatement().executeUpdate("create index if not exists NoteTextValue on `Note`(`note_upper`)");
+        getStatement().executeUpdate(CREATE_TABLE);
+        getStatement().executeUpdate(CREATE_INDEX);
     }
 
     /**
@@ -33,7 +53,7 @@ public class NoteService extends DataBaseService
      */
     public void createNote(String note) throws Exception
     {
-        getStatement().executeUpdate("insert into note (note, note_upper) values ('" + note + "', '" + note.toUpperCase() + "')");
+        getStatement().executeUpdate(MessageFormat.format(INSERT, note, note.toUpperCase()));
     }
 
     /**
@@ -48,7 +68,7 @@ public class NoteService extends DataBaseService
         Note note = null;
         try 
         {
-            resultSet = getStatement().executeQuery("select identifier, note from note");
+            resultSet = getStatement().executeQuery(SELECT);
             while (resultSet.next()) 
             {
                 note = new Note();
@@ -77,7 +97,7 @@ public class NoteService extends DataBaseService
         ResultSet resultSet = null;
         try 
         {
-            resultSet = getStatement().executeQuery("select identifier, note from note where identifier = " + identifier);
+            resultSet = getStatement().executeQuery(MessageFormat.format(SELECT_BY_IDENTIFIER, identifier));
             if (resultSet.next()) 
             {
                 result = new Note();
@@ -107,7 +127,7 @@ public class NoteService extends DataBaseService
         Note note = null;
         try 
         {
-            resultSet = getStatement().executeQuery("select identifier, note from note where note_upper like '%" + findText.toUpperCase() + "%'");
+            resultSet = getStatement().executeQuery(MessageFormat.format(SELECT_BY_NOTE, findText.toUpperCase()));
             while (resultSet.next()) 
             {
                 note = new Note();
@@ -130,7 +150,7 @@ public class NoteService extends DataBaseService
      */
     public void delete(Integer identifier) throws Exception
     {
-        getStatement().executeUpdate("delete from note where identifier = " + identifier);
+        getStatement().executeUpdate(MessageFormat.format(DELETE_BY_IDENTIFIER, identifier));
     }
 
     /**
@@ -140,6 +160,6 @@ public class NoteService extends DataBaseService
      */
     public void delete(String substringForDelete) throws Exception 
     {
-        getStatement().executeUpdate("delete from note where note_upper like '%" + substringForDelete.toUpperCase() + "%'");
+        getStatement().executeUpdate(MessageFormat.format(DELETE_BY_FIND_TEXT, substringForDelete.toUpperCase()));
     }
 }
