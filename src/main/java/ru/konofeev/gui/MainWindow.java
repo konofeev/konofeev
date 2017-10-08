@@ -11,16 +11,18 @@ import javax.swing.JTextField;
 import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.StringContent;                                        
 import javax.swing.text.StyleContext;
-import ru.konofeev.db.NoteService; import ru.konofeev.entity.Note;
+import ru.konofeev.db.NoteService; 
+import ru.konofeev.entity.Note;
 
 /**
  * Главное окно приложения
  */
 public class MainWindow
 {
-    private NoteService noteService = null;
-    private JTextArea mainArea = null;
-    private JTextField commandLine = null;
+    private NoteService noteService;
+    private JTextArea mainArea;
+    private JTextField commandLine;
+    private CommandManager commandManager;
 
     /**
      * Конструктор
@@ -37,6 +39,7 @@ public class MainWindow
      */
     private void createMainWindow() throws Exception
     {
+        commandManager = new CommandManager();
 		JFrame frame = new JFrame();
         mainArea = getMainArea();
         commandLine = getCommandLine();
@@ -72,13 +75,11 @@ public class MainWindow
             {
                 public void actionPerformed(ActionEvent e)
                 {
+                    commandManager.run(commandLine.getText());
+
                     if (Command.CLEAR.name().equalsIgnoreCase(commandLine.getText()))
                     {
                         mainArea.setText("");
-                    }
-                    if (Command.EXIT.name().equalsIgnoreCase(commandLine.getText()))
-                    {
-                        System.exit(0);
                     }
                     if (Command.GET.name().equalsIgnoreCase(commandLine.getText()))
                     {
