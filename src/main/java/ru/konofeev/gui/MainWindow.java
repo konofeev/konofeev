@@ -35,13 +35,21 @@ public class MainWindow
     }
 
     /**
+     * Получить текстовую область
+     */
+    public JTextArea getMainArea()
+    {
+        return mainArea;
+    }
+
+    /**
      * Создать главное окно
      */
     private void createMainWindow() throws Exception
     {
-        commandManager = new CommandManager();
+        commandManager = new CommandManager(this);
 		JFrame frame = new JFrame();
-        mainArea = getMainArea();
+        mainArea = createMainArea();
         commandLine = getCommandLine();
 		JScrollPane editorScrollPane = new JScrollPane(mainArea);
 		frame.add(editorScrollPane, BorderLayout.CENTER);
@@ -76,55 +84,6 @@ public class MainWindow
                 public void actionPerformed(ActionEvent e)
                 {
                     commandManager.run(commandLine.getText());
-
-                    if (Command.CLEAR.name().equalsIgnoreCase(commandLine.getText()))
-                    {
-                        mainArea.setText("");
-                    }
-                    if (Command.GET.name().equalsIgnoreCase(commandLine.getText()))
-                    {
-                        try
-                        {
-                            printNotes(mainArea);
-                        }
-                        catch (Exception exception)
-                        {
-                            System.out.println(exception.getMessage());
-                        }
-                    }
-                    if (commandLine.getText().toUpperCase().startsWith(Command.CREATE.name().toUpperCase()))
-                    {
-                        try
-                        {
-                            createNote(commandLine.getText());
-                        }
-                        catch (Exception exception)
-                        {
-                            System.out.println(exception.getMessage());
-                        }
-                    }
-                    if (commandLine.getText().toUpperCase().startsWith(Command.FIND.name().toUpperCase()))
-                    {
-                        try
-                        {
-                            findNote(commandLine.getText());
-                        }
-                        catch (Exception exception)
-                        {
-                            System.out.println(exception.getMessage());
-                        }
-                    }
-                    if (commandLine.getText().toUpperCase().startsWith(Command.DELETE.name().toUpperCase()))
-                    {
-                        try
-                        {
-                            deleteNotes();
-                        }
-                        catch (Exception exception)
-                        {
-                            System.out.println(exception.getMessage());
-                        }
-                    }
                 }
             }
         );
@@ -132,73 +91,15 @@ public class MainWindow
     }
 
     /**
-     * Получить основную тектовую область
+     * Создать основную тектовую область
      */
-    private JTextArea getMainArea() throws Exception
+    private JTextArea createMainArea() throws Exception
     {
         JTextArea textArea = new JTextArea(5, 20);
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
-        printNotes(textArea);
+        //printNotes(textArea);
+
         return textArea;
-    }
-
-    /**
-     * Напечатать заметки
-     */
-    private void printNotes(JTextArea mainArea) throws Exception
-    {
-        mainArea.append("Заметки");
-        mainArea.append(System.lineSeparator());
-        mainArea.append(System.lineSeparator());
-        List<Note> noteList = noteService.getNotes();
-        for (Note note: noteList)
-        {
-            mainArea.append("[");
-            mainArea.append(note.getIdentifier().toString());
-            mainArea.append("] ");
-            mainArea.append(note.getNote());
-            mainArea.append(System.lineSeparator());
-        }
-    }
-
-    /**
-     * Создать заметку
-     *
-     * @param commandText Текст командной строки
-     */
-    private void createNote(String commandText) throws Exception
-    {
-        String note = commandText.substring(Command.CREATE.name().length() + 1);
-        noteService.createNote(note);
-        mainArea.append(note);
-    }
-
-    /**
-     * Найти заметку
-     *
-     * @param commandText Текст командной строки
-     */
-    private void findNote(String commandText) throws Exception
-    {
-        String findText = commandText.substring(Command.FIND.name().length() + 1);
-        List<Note> noteList = noteService.find(findText);
-        mainArea.append("Найдены заметки");
-        mainArea.append(System.lineSeparator());
-        mainArea.append(System.lineSeparator());
-        for (Note note: noteList)
-        {
-            mainArea.append("[");
-            mainArea.append(note.getIdentifier().toString());
-            mainArea.append("] ");
-            mainArea.append(note.getNote());
-            mainArea.append(System.lineSeparator());
-        }
-    }
-
-    private void deleteNotes() throws Exception
-    {
-        noteService.delete();
-        mainArea.setText("");
     }
 }

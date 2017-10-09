@@ -7,6 +7,8 @@ import java.util.*;
  */
 public class CommandManager
 {
+    MainWindow mainWindow;
+
     /**
      * Список команд
      */
@@ -18,14 +20,24 @@ public class CommandManager
 
     /**
      * Конструктор
+     *
+     * @param mainWindow Главное окно
      */
-    public CommandManager()
+    public CommandManager(MainWindow mainWindow)
     {
+        this.mainWindow = mainWindow;
         commands.add(new CommandExit());
+        commands.add(new CommandClear());
+        commands.add(new CommandGet());
+        commands.add(new CommandCreate());
+        commands.add(new CommandFind());
+        commands.add(new CommandDelete());
     }
 
     /**
      * Добавить команду
+     *
+     * @param command Команда
      */
     public void additionalCommand(CommandBase command)
     {
@@ -42,7 +54,7 @@ public class CommandManager
     {
         for (CommandBase command: commands)
         {
-            command.run(commandText);
+            command.run(commandText, mainWindow);
         }
     }
 }

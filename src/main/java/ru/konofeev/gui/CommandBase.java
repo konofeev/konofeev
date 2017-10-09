@@ -8,5 +8,5 @@ public interface CommandBase
     /**
      * Выполнить команду
      */
-    void run(String commandText);
+    void run(String commandText, MainWindow mainWindow);
 }

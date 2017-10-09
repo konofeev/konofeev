@@ -5,10 +5,12 @@ package ru.konofeev.gui;
  */
 public class CommandExit implements CommandBase
 {
+    private static final String EXIT = "exit";
+
     @Override
-    public void run(String commandText)
+    public void run(String commandText, MainWindow mainWindow)
     {
-        if (Command.EXIT.name().equalsIgnoreCase(commandText))
+        if (EXIT.equalsIgnoreCase(commandText))
         {
             System.exit(0);
         }
