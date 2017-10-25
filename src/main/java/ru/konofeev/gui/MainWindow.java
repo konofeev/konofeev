@@ -11,6 +11,12 @@ import javax.swing.JTextField;
 import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.StringContent;                                        
 import javax.swing.text.StyleContext;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.web.HTMLEditor;
+import javafx.stage.Stage;
+
 import ru.konofeev.db.NoteService; 
 import ru.konofeev.entity.Note;
 
@@ -18,22 +24,22 @@ import ru.konofeev.entity.Note;
  * Главное окно приложения
  */
 public class MainWindow
-{
+{                                          
+
     private NoteService noteService;
     private JTextArea mainArea;
     private JTextField commandLine;
     private CommandManager commandManager;
-
+    
     /**
      * Конструктор
      */
     public MainWindow() throws Exception
     {
         noteService = new NoteService();
-        initializeTempNotes();
         createMainWindow();
     }
-
+    
     /**
      * Получить текстовую область
      */
@@ -41,36 +47,25 @@ public class MainWindow
     {
         return mainArea;
     }
-
+    
     /**
      * Создать главное окно
      */
     private void createMainWindow() throws Exception
     {
         commandManager = new CommandManager(this);
-		JFrame frame = new JFrame();
+    	JFrame frame = new JFrame();
         mainArea = createMainArea();
         commandLine = getCommandLine();
-		JScrollPane editorScrollPane = new JScrollPane(mainArea);
-		frame.add(editorScrollPane, BorderLayout.CENTER);
+    	JScrollPane editorScrollPane = new JScrollPane(mainArea);
+    	frame.add(editorScrollPane, BorderLayout.CENTER);
         frame.add(commandLine, BorderLayout.SOUTH);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         frame.setUndecorated(true);
-		frame.setVisible(true);
+    	frame.setVisible(true);
     }
-
-    /**
-     * Инициализация временных заметок
-     * Метод временный
-     */
-    private void initializeTempNotes() throws Exception
-    {
-        //noteService.createNote("Одна из тестовых заметок");
-        //noteService.createNote("Ещё одна из тестовых заметок");
-        //noteService.createNote("Совсем другая заметка");
-    }
-
+    
     /**
      * Получить командную строку
      */
@@ -89,7 +84,7 @@ public class MainWindow
         );
         return commandLine;
     }
-
+    
     /**
      * Создать основную тектовую область
      */
@@ -98,8 +93,7 @@ public class MainWindow
         JTextArea textArea = new JTextArea(5, 20);
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
-        //printNotes(textArea);
-
+    
         return textArea;
     }
 }
