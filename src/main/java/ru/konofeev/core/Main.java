@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 /**
  * Основной класс 
  */
-public class Main extends Application
+public class Main
 {
     /**
      * Точка входа
@@ -22,19 +22,6 @@ public class Main extends Application
      */
     public static void main(String[] arguments) throws Exception
     {
-        launch(arguments);
+        MainWindow.start(arguments);
     }                                 
-
-    @Override
-    public void start(Stage stage) 
-	{
-        stage.setTitle("HTMLEditor Sample");
-        stage.setWidth(400);
-        stage.setHeight(300);   
-        final HTMLEditor htmlEditor = new HTMLEditor();
-        htmlEditor.setPrefHeight(245);
-        Scene scene = new Scene(htmlEditor);       
-        stage.setScene(scene);
-        stage.show();
-    }
 }
