@@ -36,7 +36,7 @@ public class CommandExit implements Command
     }
 
     @Override
-    public boolean checkCommand()
+    public boolean check()
     {
         if ("exit".equalsIgnoreCase(Global.INSTANCE.getCommandLine().getText()))
         {

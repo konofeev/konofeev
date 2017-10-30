@@ -3,6 +3,7 @@ package ru.konofeev.core;
 import ru.konofeev.gui.CommandLine;
 import ru.konofeev.gui.Editor;
 import ru.konofeev.core.CommandManager;
+import ru.konofeev.db.NoteService;
 
 /**
  * Глобализм
@@ -14,6 +15,7 @@ public enum Global
     private CommandLine commandLine;
     private Editor editor;
     private CommandManager commandManager;
+    private NoteService noteService;
 
     /**
      * Получить коммандную строку
@@ -52,5 +54,18 @@ public enum Global
         }
 
         return commandManager;
+    }
+
+    /**
+     * Получить сервис заметок
+     */
+    public NoteService getNoteService() throws Exception
+    {
+        if (noteService == null)
+        {
+            noteService = new NoteService();
+        }
+
+        return noteService;
     }
 }

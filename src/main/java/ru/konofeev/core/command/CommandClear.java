@@ -34,7 +34,7 @@ public class CommandClear implements Command
     }
 
     @Override
-    public boolean checkCommand()
+    public boolean check()
     {
         if ("clear".equalsIgnoreCase(Global.INSTANCE.getCommandLine().getText()))
         {

@@ -36,5 +36,5 @@ public interface Command
      *
      * @return true, если команду нужно выполнить, иначе - false
      */
-    boolean checkCommand();
+    boolean check();
 }

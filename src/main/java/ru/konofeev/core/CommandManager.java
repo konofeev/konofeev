@@ -29,6 +29,7 @@ public class CommandManager
         commandList = new ArrayList<Command>();
         commandList.add(new CommandExit());
         commandList.add(new CommandClear());
+        commandList.add(new CommandNote());
     }
 
     /**
@@ -38,7 +39,7 @@ public class CommandManager
     {
         for (Command command: commandList)
         {
-            if (command.checkCommand())
+            if (command.check())
             {
                 command.run();
             }
