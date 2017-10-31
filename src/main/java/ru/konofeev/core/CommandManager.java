@@ -22,6 +22,16 @@ public class CommandManager
     }
 
     /**
+     * Получить список команд
+     *
+     * @return Список команд
+     */
+    public List<Command> getCommandList()
+    {
+        return commandList;
+    }
+
+    /**
      * Конструктор
      */
     public CommandManager()
@@ -30,6 +40,7 @@ public class CommandManager
         commandList.add(new CommandExit());
         commandList.add(new CommandClear());
         commandList.add(new CommandNote());
+        commandList.add(new CommandHelp());
     }
 
     /**
