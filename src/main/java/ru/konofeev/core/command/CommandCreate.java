@@ -2,43 +2,41 @@ package ru.konofeev.core.command;
 
 import java.util.List;
 import java.util.ArrayList;
-import javafx.application.Platform;
 import ru.konofeev.core.Global;
 
-public class CommandExit implements Command
+public class CommandCreate implements Command
 {
     @Override
     public String getDescription()
     {
-        return "Закрыть приложение";
+        return "Создать заметку";
     }
 
     @Override
     public String getName()
     {
-        return "Выход";
+        return "Создание";
     }
 
     @Override
     public List<String> getExamples()
     {
         List<String> examples = new ArrayList<String>();
-        examples.add("exit");
+        examples.add("create <text note>");
         return examples;
     }
 
     @Override
     public boolean run()
     {
-        Platform.exit();
-
+        Global.INSTANCE.getEditor().setHtmlText("");
         return true;
     }
 
     @Override
     public boolean check()
     {
-        if ("exit".equalsIgnoreCase(Global.INSTANCE.getCommandLine().getText()))
+        if ("create".equalsIgnoreCase(Global.INSTANCE.getCommandLine().getText()))
         {
             return true;
         }

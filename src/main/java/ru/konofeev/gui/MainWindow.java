@@ -1,12 +1,10 @@
 package ru.konofeev.gui;
 
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.Event;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCodeCombination;
-import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.web.HTMLEditor;
@@ -19,9 +17,10 @@ import ru.konofeev.core.Global;
  */
 public class MainWindow extends Application
 {
-    private static final String TITLE = "Заметки";
+    private static final String TITLE = "Notes";
     private final HTMLEditor editor;
     private final TextField commandLine;
+    private static final Logger LOG = Logger.getLogger(MainWindow.class.getName());
 
     /**
      * Запуск
@@ -67,7 +66,7 @@ public class MainWindow extends Application
     {
         if (((KeyEvent)event).getCharacter().equals(":"))
         {
-            System.out.println("Переход в командный режим: " + ((KeyEvent)event).getCharacter() + " type: " + event.getTarget().getClass().getName());
+            LOG.info("Goto command line: " + ((KeyEvent)event).getCharacter() + " type: " + event.getTarget().getClass().getName());
             
             if (event.getTarget().getClass().getName().equals(WebView.class.getName()))
             {

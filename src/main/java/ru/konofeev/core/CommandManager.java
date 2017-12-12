@@ -39,7 +39,7 @@ public class CommandManager
         commandList = new ArrayList<Command>();
         commandList.add(new CommandExit());
         commandList.add(new CommandClear());
-        commandList.add(new CommandNote());
+        commandList.add(new CommandGet());
         commandList.add(new CommandHelp());
     }
 

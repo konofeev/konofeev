@@ -1,7 +1,6 @@
 package ru.konofeev;
 
 import java.util.List;
-import org.junit.BeforeClass;
 import org.junit.AfterClass;
 import org.junit.Test;
 import ru.konofeev.db.NoteService;
@@ -24,6 +23,7 @@ public class TestNote
 
     /**
      * Создать заметку
+     * @throws java.lang.Exception
      */
     @Test
     public void createNote() throws Exception
@@ -34,6 +34,7 @@ public class TestNote
 
     /**
      * Получить заметки
+     * @throws java.lang.Exception
      */
     @Test
     public void getNotes() throws Exception
@@ -45,6 +46,7 @@ public class TestNote
 
     /**
      * Найти заметку
+     * @throws java.lang.Exception
      */
     @Test
     public void findNote() throws Exception
@@ -60,6 +62,7 @@ public class TestNote
 
     /**
      * Получить заметку
+     * @throws java.lang.Exception
      */
     @Test
     public void getNote() throws Exception
@@ -73,6 +76,7 @@ public class TestNote
 
     /**
      * Удалить заметку
+     * @throws java.lang.Exception
      */
     @Test
     public void deleteNote() throws Exception

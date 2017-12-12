@@ -45,4 +45,10 @@ public class CommandClear implements Command
             return false;
         }
     }
+
+    @Override
+    public List<String> getAdditionalParameters()
+    {
+        return new ArrayList<String>();
+    }
 }

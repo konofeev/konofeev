@@ -59,4 +59,10 @@ public class CommandHelp implements Command
             return false;
         }
     } 
+
+    @Override
+    public List<String> getAdditionalParameters()
+    {
+        return new ArrayList<String>();
+    }
 }

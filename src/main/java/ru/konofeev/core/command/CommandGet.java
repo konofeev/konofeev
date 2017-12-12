@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import ru.konofeev.core.Global;
 import ru.konofeev.entity.Note;
 
-public class CommandNote implements Command
+public class CommandGet implements Command
 {    
     @Override
     public String getDescription()
@@ -63,4 +63,10 @@ public class CommandNote implements Command
             return false;
         }
     } 
+
+    @Override
+    public List<String> getAdditionalParameters()
+    {
+        return new ArrayList<String>();
+    }
 }

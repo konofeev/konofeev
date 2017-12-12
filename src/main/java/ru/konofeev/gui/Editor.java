@@ -16,6 +16,7 @@ public class Editor extends HTMLEditor
      */
     public Editor()
     {
+        // temp content
         setHtmlText("Html text");
     }
 }

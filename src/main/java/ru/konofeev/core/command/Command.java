@@ -37,4 +37,11 @@ public interface Command
      * @return true, если команду нужно выполнить, иначе - false
      */
     boolean check();
+
+    /**
+     * Получить допустимые параметры
+     *
+     * @return Список дополнительных параметров
+     */
+    List<String> getAdditionalParameters();
 }
