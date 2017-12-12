@@ -9,7 +9,7 @@ import javafx.scene.web.HTMLEditor;
 /**
  * Главное окно приложения
  */
-public class Editor extends HTMLEditor
+public class Editor extends HTMLEditor implements IEditor
 {
     /**
      * Конструктор
@@ -18,5 +18,11 @@ public class Editor extends HTMLEditor
     {
         // temp content
         setHtmlText("Html text");
+    }
+
+    @Override
+    public void setHtmlText(String htmlText)
+    {
+        super.setHtmlText(htmlText);
     }
 }

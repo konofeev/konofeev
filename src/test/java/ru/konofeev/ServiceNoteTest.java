@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 /**
  * Сущность заметок в БД
  */
-public class TestNote
+public class ServiceNoteTest
 {
     private static final String NOTE_TEXT = "Заметка. Сигнатура999";
 

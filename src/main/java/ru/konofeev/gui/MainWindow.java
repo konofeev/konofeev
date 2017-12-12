@@ -37,7 +37,7 @@ public class MainWindow extends Application
      */
     public MainWindow()
     {
-        editor = Global.INSTANCE.getEditor();
+        editor = (HTMLEditor)Global.INSTANCE.getEditor();
         commandLine = Global.INSTANCE.getCommandLine();
     }
 

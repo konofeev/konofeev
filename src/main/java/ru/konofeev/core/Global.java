@@ -2,6 +2,7 @@ package ru.konofeev.core;
 
 import ru.konofeev.gui.CommandLine;
 import ru.konofeev.gui.Editor;
+import ru.konofeev.gui.IEditor;
 import ru.konofeev.core.CommandManager;
 import ru.konofeev.db.NoteService;
 
@@ -13,7 +14,7 @@ public enum Global
     INSTANCE;
 
     private CommandLine commandLine;
-    private Editor editor;
+    private IEditor editor;
     private CommandManager commandManager;
     private NoteService noteService;
 
@@ -33,7 +34,7 @@ public enum Global
     /**
      * Получить редактируему область
      */
-    public Editor getEditor()
+    public IEditor getEditor()
     {
         if (editor == null)
         {
