@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.Event;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
@@ -17,20 +18,10 @@ import ru.konofeev.core.Global;
  */
 public class MainWindow extends Application
 {
-    private static final String TITLE = "Notes";
+    private static final String TITLE = "Заметки";
     private final HTMLEditor editor;
     private final TextField commandLine;
-    private static final Logger LOG = Logger.getLogger(MainWindow.class.getName());
-
-    /**
-     * Запуск
-     *
-     * @param arguments Аргументы командной строки
-     */
-    public static void start(String[] arguments)
-    {
-        launch(arguments);
-    }
+    private static final Logger LOGGER = Logger.getLogger(MainWindow.class.getName());
 
     /**
      * Конструктор
@@ -47,26 +38,36 @@ public class MainWindow extends Application
         stage.setTitle(TITLE);
         stage.setMaximized(true);
 
+        // TODO: сделать отдельной командой переключение "Во весь экран (без рамки)"
+        // stage.setFullScreen(true);
+
+        Label helloWorldLabel = new Label("Hello world!");
+
         BorderPane borderPane = new BorderPane();
-        borderPane.setCenter(editor);
-        borderPane.setBottom(commandLine);
+        borderPane.setCenter(helloWorldLabel);
 
         Scene scene = new Scene(borderPane);
-        scene.addEventFilter
-        (
-            KeyEvent.KEY_TYPED,
-            event -> processingKeyboard(event)
-        );
+        scene.addEventFilter(KeyEvent.KEY_TYPED, this::processingKeyboard);
         stage.setScene(scene);
         stage.show();
         editor.requestFocus();
+    }
+
+    /**
+     * Запуск
+     *
+     * @param arguments Аргументы командной строки
+     */
+    public static void start(String[] arguments)
+    {
+        launch(arguments);
     }
 
     private void processingKeyboard(Event event)
     {
         if (((KeyEvent)event).getCharacter().equals(":"))
         {
-            LOG.info("Goto command line: " + ((KeyEvent)event).getCharacter() + " type: " + event.getTarget().getClass().getName());
+            LOGGER.info(String.format("Goto command line: %s type: %s", ((KeyEvent) event).getCharacter(), event.getTarget().getClass().getName()));
             
             if (event.getTarget().getClass().getName().equals(WebView.class.getName()))
             {
