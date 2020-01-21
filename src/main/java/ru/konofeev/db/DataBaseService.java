@@ -2,10 +2,8 @@ package ru.konofeev.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Map;
-import java.util.HashMap;
 
 /**
  * Базовый класс работы с базой данных
@@ -36,11 +34,12 @@ public class DataBaseService
     /**
      * Получить подключение БД
      */
-    public Statement getStatement() throws Exception
+    Statement getStatement() throws SQLException, ClassNotFoundException
     {
 		Class.forName(DRIVER);
-		Connection connection = DriverManager.getConnection(DB_PROTOCOL + DB_PATH + DB_NAME);
-        return connection.createStatement();
+        try (Connection connection = DriverManager.getConnection(DB_PROTOCOL + DB_PATH + DB_NAME)) {
+            return connection.createStatement();
+        }
     }
 
 }

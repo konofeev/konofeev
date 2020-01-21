@@ -3,8 +3,9 @@ package ru.konofeev.core;
 import ru.konofeev.gui.CommandLine;
 import ru.konofeev.gui.Editor;
 import ru.konofeev.gui.IEditor;
-import ru.konofeev.core.CommandManager;
 import ru.konofeev.db.NoteService;
+
+import java.sql.SQLException;
 
 /**
  * Глобализм
@@ -60,7 +61,7 @@ public enum Global
     /**
      * Получить сервис заметок
      */
-    public NoteService getNoteService() throws Exception
+    public NoteService getNoteService() throws SQLException, ClassNotFoundException
     {
         if (noteService == null)
         {

@@ -57,7 +57,7 @@ public class ServiceNoteTest
         assertNotNull(noteList);
         assertNotNull(noteList.get(0));
         assertNotNull(noteList.get(0).getIdentifier());
-        assertNotNull(noteList.get(0).getNote());
+        assertNotNull(noteList.get(0).getMessage());
     }
 
     /**

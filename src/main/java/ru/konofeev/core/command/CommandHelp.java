@@ -1,9 +1,9 @@
 package ru.konofeev.core.command;
 
-import java.util.List;
-import java.util.ArrayList;
 import ru.konofeev.core.Global;
-import ru.konofeev.entity.Note;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CommandHelp implements Command
 {    
@@ -22,7 +22,7 @@ public class CommandHelp implements Command
     @Override
     public List<String> getExamples()
     {
-        List<String> examples = new ArrayList<String>();
+        List<String> examples = new ArrayList<>();
         examples.add("help");
         return examples;
     }
@@ -30,39 +30,32 @@ public class CommandHelp implements Command
     @Override
     public boolean run()
     {
-        String help = "";
+        StringBuilder help = new StringBuilder();
         List<Command> commandList = Global.INSTANCE.getCommandManager().getCommandList();
         for (Command command: commandList)
         {
-            help = help + "<h2>" + command.getName() + "</h2>";
-            help = help + "<p>" + command.getDescription() + "</p>";
-            help = help + "<p>";
+            help.append("<h2>").append(command.getName()).append("</h2>");
+            help.append("<p>").append(command.getDescription()).append("</p>");
+            help.append("<p>");
             for (String example: command.getExamples())
             {
-                help = help + example + "<br>";
+                help.append(example).append("<br>");
             }
-            help = help + "</p>";
+            help.append("</p>");
         }
-        Global.INSTANCE.getEditor().setHtmlText(help);
+        Global.INSTANCE.getEditor().setHtmlText(help.toString());
         return true;
     }
 
     @Override
     public boolean check()
     {
-        if ("help".equalsIgnoreCase(Global.INSTANCE.getCommandLine().getText()))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return "help".equalsIgnoreCase(Global.INSTANCE.getCommandLine().getText());
     } 
 
     @Override
     public List<String> getAdditionalParameters()
     {
-        return new ArrayList<String>();
+        return new ArrayList<>();
     }
 }

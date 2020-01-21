@@ -13,7 +13,7 @@ public class Note
     /**
      * Заметка
      */
-    private String note;
+    private String message;
 
     /**
      * Получить идентификатор заметки
@@ -40,18 +40,18 @@ public class Note
      *
      * @return заметка
      */
-    public String getNote()
+    public String getMessage()
     {
-        return note;
+        return message;
     }
 
     /**
      * Установить заметку
      *
-     * @param note Заметка
+     * @param message Заметка
      */
-    public void setNote(String note)
+    public void setMessage(String message)
     {
-        this.note = note;
+        this.message = message;
     }
 }

@@ -15,7 +15,7 @@ public class CommandLine extends TextField
      */
     public CommandLine()
     {
-        setOnKeyPressed(event -> processingKeyboard(event));
+        setOnKeyPressed(this::processingKeyboard);
     }
 
     private void processingKeyboard(KeyEvent event)

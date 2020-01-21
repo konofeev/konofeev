@@ -21,7 +21,7 @@ public class CommandCreate implements Command
     @Override
     public List<String> getExamples()
     {
-        List<String> examples = new ArrayList<String>();
+        List<String> examples = new ArrayList<>();
         examples.add("create <text note>");
         return examples;
     }
@@ -36,19 +36,12 @@ public class CommandCreate implements Command
     @Override
     public boolean check()
     {
-        if ("create".equalsIgnoreCase(Global.INSTANCE.getCommandLine().getText()))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return "create".equalsIgnoreCase(Global.INSTANCE.getCommandLine().getText());
     }
 
     @Override
     public List<String> getAdditionalParameters()
     {
-        return new ArrayList<String>();
+        return new ArrayList<>();
     }
 }

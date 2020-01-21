@@ -22,7 +22,7 @@ public class CommandExit implements Command
     @Override
     public List<String> getExamples()
     {
-        List<String> examples = new ArrayList<String>();
+        List<String> examples = new ArrayList<>();
         examples.add("exit");
         return examples;
     }
@@ -38,19 +38,12 @@ public class CommandExit implements Command
     @Override
     public boolean check()
     {
-        if ("exit".equalsIgnoreCase(Global.INSTANCE.getCommandLine().getText()))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return "exit".equalsIgnoreCase(Global.INSTANCE.getCommandLine().getText());
     }
 
     @Override
     public List<String> getAdditionalParameters()
     {
-        return new ArrayList<String>();
+        return new ArrayList<>();
     }
 }

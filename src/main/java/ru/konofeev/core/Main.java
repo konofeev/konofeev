@@ -12,7 +12,7 @@ public class Main
      *
      * @param arguments Аргументы командной строки
      */
-    public static void main(String[] arguments) throws Exception
+    public static void main(String[] arguments)
     {
         MainWindow.start(arguments);
     }

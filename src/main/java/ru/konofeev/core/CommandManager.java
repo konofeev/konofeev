@@ -36,7 +36,7 @@ public class CommandManager
      */
     public CommandManager()
     {
-        commandList = new ArrayList<Command>();
+        commandList = new ArrayList<>();
         commandList.add(new CommandExit());
         commandList.add(new CommandClear());
         commandList.add(new CommandGet());

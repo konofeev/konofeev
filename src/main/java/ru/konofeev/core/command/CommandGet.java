@@ -22,7 +22,7 @@ public class CommandGet implements Command
     @Override
     public List<String> getExamples()
     {
-        List<String> examples = new ArrayList<String>();
+        List<String> examples = new ArrayList<>();
         examples.add("get");
         return examples;
     }
@@ -30,9 +30,8 @@ public class CommandGet implements Command
     @Override
     public boolean run()
     {
-        String noteString = "";
-        List<Note> noteList = new ArrayList<Note>();
-        //Global.INSTANCE.getEditor().setHtmlText("");
+        StringBuilder noteString = new StringBuilder();
+        List<Note> noteList;
         try
         {
             noteList = Global.INSTANCE.getNoteService().getNotes();
@@ -44,9 +43,9 @@ public class CommandGet implements Command
         }
         for (Note note: noteList)
         {
-            noteString = noteString + note.getNote() + "<br>";
+            noteString.append(note.getMessage()).append("<br>");
         }
-        Global.INSTANCE.getEditor().setHtmlText(noteString);
+        Global.INSTANCE.getEditor().setHtmlText(noteString.toString());
 
         return true;
     }
@@ -54,19 +53,12 @@ public class CommandGet implements Command
     @Override
     public boolean check()
     {
-        if ("get".equalsIgnoreCase(Global.INSTANCE.getCommandLine().getText()))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return "get".equalsIgnoreCase(Global.INSTANCE.getCommandLine().getText());
     } 
 
     @Override
     public List<String> getAdditionalParameters()
     {
-        return new ArrayList<String>();
+        return new ArrayList<>();
     }
 }

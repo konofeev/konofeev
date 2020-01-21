@@ -38,9 +38,6 @@ public class MainWindow extends Application
         stage.setTitle(TITLE);
         stage.setMaximized(true);
 
-        // TODO: сделать отдельной командой переключение "Во весь экран (без рамки)"
-        // stage.setFullScreen(true);
-
         Label helloWorldLabel = new Label("Hello world!");
 
         BorderPane borderPane = new BorderPane();
