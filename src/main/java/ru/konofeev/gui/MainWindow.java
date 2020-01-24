@@ -13,6 +13,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import ru.konofeev.controller.MainSceneController;
 
 /**
  * Главное окно приложения
@@ -45,6 +46,7 @@ public class MainWindow extends Application
     private void simpleFxml(Stage stage) throws IOException
     {
         FXMLLoader loader = new FXMLLoader();
+        loader.setController(new MainSceneController());
         URL xmlUrl = getClass().getResource("/mainScene.fxml");
         loader.setLocation(xmlUrl);
         Parent root = loader.load();
