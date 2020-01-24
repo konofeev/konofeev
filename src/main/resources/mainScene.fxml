@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?language javascript?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml">
+
+
+    <Label fx:id="mainTitle" text="Пример Мир!"/>
+    <Label fx:id="subTitle" text="Это пример простого приложения."/>
+    <Button fx:id="mainButton" text="Нажми на меня!" onAction="buttonClicked()"/>
+
+    <fx:script>
+        function buttonClicked()
+        {
+            mainButton.setText("Кнопка была нажата");
+        }
+    </fx:script>
+</VBox>
+

@@ -1,8 +1,12 @@
 package ru.konofeev.gui;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.Event;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
@@ -19,20 +23,13 @@ public class MainWindow extends Application
     private static final Logger LOGGER = Logger.getLogger(MainWindow.class.getName());
 
     @Override
-    public void start(Stage stage)
+    public void start(Stage stage) throws IOException
     {
         stage.setTitle(TITLE);
         stage.setMaximized(true);
 
-        Label helloWorldLabel = new Label("Hello world!");
-
-        BorderPane borderPane = new BorderPane();
-        borderPane.setCenter(helloWorldLabel);
-
-        Scene scene = new Scene(borderPane);
-        scene.addEventFilter(KeyEvent.KEY_TYPED, this::processingKeyboard);
-        stage.setScene(scene);
-        stage.show();
+//        simpleLabel(stage);
+        simpleFxml(stage);
     }
 
     /**
@@ -43,6 +40,30 @@ public class MainWindow extends Application
     public static void start(String[] arguments)
     {
         launch(arguments);
+    }
+
+    private void simpleFxml(Stage stage) throws IOException
+    {
+        FXMLLoader loader = new FXMLLoader();
+        URL xmlUrl = getClass().getResource("/mainScene.fxml");
+        loader.setLocation(xmlUrl);
+        Parent root = loader.load();
+
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    private void simpleLabel(Stage stage)
+    {
+        Label helloWorldLabel = new Label("Hello world!");
+
+        BorderPane borderPane = new BorderPane();
+        borderPane.setCenter(helloWorldLabel);
+
+        Scene scene = new Scene(borderPane);
+        scene.addEventFilter(KeyEvent.KEY_TYPED, this::processingKeyboard);
+        stage.setScene(scene);
+        stage.show();
     }
 
     private void processingKeyboard(Event event)
