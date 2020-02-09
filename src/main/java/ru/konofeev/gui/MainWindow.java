@@ -29,8 +29,8 @@ public class MainWindow extends Application
         stage.setTitle(TITLE);
         stage.setMaximized(true);
 
-//        simpleLabel(stage);
-        simpleFxml(stage);
+        simpleLabel(stage);
+//        simpleFxml(stage);
     }
 
     /**
@@ -57,13 +57,15 @@ public class MainWindow extends Application
 
     private void simpleLabel(Stage stage)
     {
-        Label helloWorldLabel = new Label("Hello world!");
-
+        MyTextField field = new MyTextField("Text field");
+        MyTextField field2 = new MyTextField("Text field");
         BorderPane borderPane = new BorderPane();
-        borderPane.setCenter(helloWorldLabel);
+        borderPane.setCenter(field);
+        borderPane.setBottom(field2);
 
         Scene scene = new Scene(borderPane);
         scene.addEventFilter(KeyEvent.KEY_TYPED, this::processingKeyboard);
+        scene.getStylesheets().add("MyStyle.css");
         stage.setScene(scene);
         stage.show();
     }
